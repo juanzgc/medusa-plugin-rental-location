@@ -14,6 +14,10 @@ import {
 } from "typeorm"
 import { ulid } from "ulid"
 import { ProductVariant } from "@medusajs/medusa"
+import {
+  DbAwareColumn,
+  resolveDbType,
+} from "@medusajs/medusa/dist/utils/db-aware-column"
 
 @Entity()
 export class Location {
@@ -24,7 +28,7 @@ export class Location {
   city: string
 
   @ManyToOne(() => ProductVariant)
-  @JoinColumn({ name: "variant_id" })
+  @JoinColumn({ name: "id" })
   variant: ProductVariant
 
   @Column()
@@ -34,7 +38,10 @@ export class Location {
   @Column()
   country: string
 
-  @Column({ type: "jsonb", nullable: true })
+  @DeleteDateColumn({ type: resolveDbType("timestamptz") })
+  deleted_at: Date
+
+  @DbAwareColumn({ type: "jsonb", nullable: true })
   metadata: any
 
   @BeforeInsert()

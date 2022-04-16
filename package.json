@@ -20,9 +20,10 @@
   "license": "MIT",
   "scripts": {
     "clean": "./node_modules/.bin/rimraf services/ models/ migrations/ api/ subscribers/ index.js index.map.js",
-    "build": "npm run clean && tsc -p tsconfig.json",
+    "build": "tsc -p tsconfig.json",
     "watch": "tsc --watch",
-    "test": "jest"
+    "test": "jest",
+    "typeorm": "ts-node -r tsconfig-paths/register ./node_modules/typeorm/cli.js"
   },
   "devDependencies": {
     "@medusajs/medusa": "^1.x",
@@ -49,7 +50,7 @@
     "express": "^4.17.2",
     "medusa-core-utils": "^1.1.31",
     "medusa-test-utils": "^1.1.37",
-    "typeorm": "^0.3.6"
+    "typeorm": "0.2.31"
   },
   "jest": {
     "globals": {
